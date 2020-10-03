@@ -12,8 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Link, useHistory} from "react-router-dom";
-import {login} from "./store/actions/userActions";
+import {login} from "../store/actions/userActions";
 import {connect} from "react-redux";
+import fetchUser from "../store/actions/fetchUser";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -39,7 +40,6 @@ function LoginPage({loginAction, message}) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    //const history = useHistory();
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
@@ -119,7 +119,7 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        loginAction: (email, password) => dispatch(login(email, password)) // [1]
+        loginAction: (email, password) => dispatch(fetchUser({email, password})) // [1]
     }
 };
 

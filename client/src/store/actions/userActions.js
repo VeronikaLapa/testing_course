@@ -5,18 +5,22 @@ export function logout() {
     }
 }
 
-export function login(email, password) {
-    //TODO Make request to backend
-    console.log('action', email, password, email === 'qaz', password === 'qaz');
-    if (email === 'qaz' && password === 'qaz') {
-        return {
-            type: 'LOG_IN',
-            payload: {email: email, password: password}
-        }
-    } else {
-        return {
-            type: 'LOGIN_ERROR',
-            payload: 'wrong name or password'
-        }
+export function fetchUserPending() {
+    return {
+        type: 'FETCH_USER_PENDING'
+    }
+}
+
+export function fetchUserSuccess(res) {
+    return {
+        type: 'FETCH_USER_SUCCESS',
+        payload: res
+    }
+}
+
+export function fetchUserError(error) {
+    return {
+        type: 'FETCH_USER_ERROR',
+        payload: error
     }
 }

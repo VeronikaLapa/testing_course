@@ -1,16 +1,22 @@
 const initialState = {
-    auth: true,
-    message: ''
+    auth: false,
+    message: '',
+    user: {},
+    pending: false
 };
 
 export function userReducer(state = initialState, action) {
     switch (action.type) {
         case 'LOG_OUT':
-            return { ...state, auth: false, message: '' };
-        case 'LOG_IN':
-            return {...state, auth: true, message: ''};
+            return { ...state, auth: false, user: {}};
         case 'LOGIN_ERROR':
-            return {...state, message: action.payload, auth: false};
+            return {...state, message: action.payload};
+        case 'FETCH_USER_PENDING':
+            return {...state, pending: true};
+        case 'FETCH_USER_SUCCESS':
+            return {...state, pending: false, user: action.payload, auth:true};
+        case 'FETCH_USER_ERROR':
+            return {...state, pending: false, message: action.payload};
         default:
             return state
     }

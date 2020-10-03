@@ -7,3 +7,4 @@ const initialState = {
 export function infoReducer(state = initialState) {
     return state
 }
+

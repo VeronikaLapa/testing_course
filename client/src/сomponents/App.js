@@ -5,7 +5,7 @@ import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import MenuBar from "./MenuBar";
 import LogoutPage from "./LogoutPage";
-import store from "./store/store";
+import store from "../store/store";
 import HelloPage from "./HelloPage";
 
 function App() {

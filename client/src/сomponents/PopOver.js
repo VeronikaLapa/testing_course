@@ -39,7 +39,7 @@ function PopOver({auth}) {
             setAnchorEl(null);
         }
     });
-    
+
     const handleMenu = (event) => {
         console.log('handle menu');
         setAnchorEl(event.currentTarget);
