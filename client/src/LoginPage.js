@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {login} from "./store/actions/userActions";
 import {connect} from "react-redux";
 
@@ -34,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
 }));
-
 function LoginPage({loginAction, message}) {
-
+    const history = useHistory();
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    //const history = useHistory();
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
@@ -50,7 +50,13 @@ function LoginPage({loginAction, message}) {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form} >
+                <form className={classes.form}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    console.log(email, password);
+                    loginAction(email, password);
+                    history.push('/hello');
+                }}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -87,7 +93,6 @@ function LoginPage({loginAction, message}) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={() => loginAction(email, password)}
                     >
                         Sign In
                     </Button>

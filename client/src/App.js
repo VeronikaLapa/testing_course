@@ -6,6 +6,7 @@ import SignupPage from "./SignupPage";
 import MenuBar from "./MenuBar";
 import LogoutPage from "./LogoutPage";
 import store from "./store/store";
+import HelloPage from "./HelloPage";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
             <Route exact path="/" component={LoginPage}/>
             <Route exact path="/signup" component={SignupPage}/>
             <Route exact path="/logout" component={LogoutPage}/>
+            <Route exact path="/hello" component={HelloPage}/>
         </BrowserRouter>
         </Provider>
     );

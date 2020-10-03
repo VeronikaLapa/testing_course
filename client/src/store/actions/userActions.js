@@ -7,7 +7,8 @@ export function logout() {
 
 export function login(email, password) {
     //TODO Make request to backend
-    if (email === 'qaz@qaz.qaz' && password === 'qaz') {
+    console.log('action', email, password, email === 'qaz', password === 'qaz');
+    if (email === 'qaz' && password === 'qaz') {
         return {
             type: 'LOG_IN',
             payload: {email: email, password: password}
