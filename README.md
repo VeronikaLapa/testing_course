@@ -13,8 +13,9 @@
 При запуске фроонтенд стартует на 3000 порте, бек на 4000.
 
 ## Тесты ui
-Написаны юнит тесты на jest  и на mocha. Также есть пример snaphot теста на jest.
+Написаны юнит тесты на jest  и на mocha. Также есть пример snapshot теста на jest.
 
 Команды для запуска тестов: npm jesttest и npm mochatest.
 
 Мои заметки о сравнении данных test runners: [Jest vs Mocha](https://docs.google.com/document/d/1ulTE9VyNpwI2yN60doqlsrUM3ugssI3IxJV3HlQqFOY/edit?usp=sharing)
+Позже отредактирую и перенесу заметки в ghpages, как того требует задание
