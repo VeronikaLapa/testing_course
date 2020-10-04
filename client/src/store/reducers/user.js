@@ -9,8 +9,6 @@ export function userReducer(state = initialState, action) {
     switch (action.type) {
         case 'LOG_OUT':
             return { ...state, auth: false, user: {}};
-        case 'LOGIN_ERROR':
-            return {...state, message: action.payload};
         case 'FETCH_USER_PENDING':
             return {...state, pending: true};
         case 'FETCH_USER_SUCCESS':
