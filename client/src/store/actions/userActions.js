@@ -24,3 +24,8 @@ export function fetchUserError(error) {
         payload: error
     }
 }
+export function redirect() {
+    return {
+        type: 'REDIRECT'
+    }
+}

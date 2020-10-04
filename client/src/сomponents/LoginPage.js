@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Link, useHistory} from "react-router-dom";
-import {login} from "../store/actions/userActions";
+import {login, redirect} from "../store/actions/userActions";
 import {connect} from "react-redux";
 import fetchUser from "../store/actions/fetchUser";
 
@@ -35,13 +35,22 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
 }));
-function LoginPage({loginAction, message}) {
+
+function LoginPage({loginAction, message, needRedirect, redirect}) {
     const history = useHistory();
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        if (needRedirect) {
+            redirect();
+            history.push('/hello');
+        }
+    });
     return (
         <Container component="main" maxWidth="xs">
+
             <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -51,12 +60,10 @@ function LoginPage({loginAction, message}) {
                     Sign in
                 </Typography>
                 <form className={classes.form}
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    console.log(email, password);
-                    loginAction(email, password);
-                    history.push('/hello');
-                }}>
+                      onSubmit={(e) => {
+                          e.preventDefault();
+                          loginAction(email, password);
+                      }}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -114,12 +121,14 @@ function LoginPage({loginAction, message}) {
 const mapStateToProps = store => {
     console.log(store); // посмотрим, что же у нас в store?
     return {
-        message: store.user.message
+        message: store.user.message,
+        needRedirect: store.user.justLogin
     }
 };
 const mapDispatchToProps = dispatch => {
     return {
-        loginAction: (email, password) => dispatch(fetchUser({email, password})) // [1]
+        loginAction: (email, password) => dispatch(fetchUser({email, password})), // [1]
+        redirect: () => dispatch(redirect())
     }
 };
 
