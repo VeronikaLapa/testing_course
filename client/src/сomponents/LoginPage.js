@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 function LoginPage({loginAction, message, needRedirect, redirect}) {
     const history = useHistory();
     const classes = useStyles();
-    const [email, setEmail] = useState('');
+    const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
     useEffect(() => {
@@ -62,19 +62,18 @@ function LoginPage({loginAction, message, needRedirect, redirect}) {
                 <form className={classes.form}
                       onSubmit={(e) => {
                           e.preventDefault();
-                          loginAction(email, password);
+                          loginAction(login, password);
                       }}>
                     <TextField
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="login"
+                        label="Login"
+                        name="login"
                         autoFocus
-                        onChange={(event) => setEmail(event.target.value)}
+                        onChange={(event) => setLogin(event.target.value)}
                         error={message !== ""}
                         helperText={message}
                     />
@@ -119,7 +118,6 @@ function LoginPage({loginAction, message, needRedirect, redirect}) {
 }
 
 const mapStateToProps = store => {
-    console.log(store); // посмотрим, что же у нас в store?
     return {
         message: store.user.message,
         needRedirect: store.user.justLogin
@@ -127,7 +125,7 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        loginAction: (email, password) => dispatch(fetchUser({email, password})), // [1]
+        loginAction: (login, password) => dispatch(fetchUser({login, password})), // [1]
         redirect: () => dispatch(redirect())
     }
 };

@@ -1,26 +1,27 @@
-import {fetchUserPending, fetchUserSuccess, fetchUserError} from './userActions';
+import {fetchUserPending, fetchUserSuccess, fetchUserError, getAuthUser} from './userActions';
+import axios from "axios";
 
 function fetchUser(data) {
     return dispatch => {
         dispatch(fetchUserPending());
-        fetch('http://localhost:4000/user',
-            {
-                method: 'POST',
-                body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!
-                headers: {
-                    'Content-Type': 'application/json'
-                }}
-                )
-            .then(res => {
-                return res.json();
-            })
+        const url = 'http://localhost:8080/api/jwt',
+            params = {login: data.login, password: data.password};
+        //Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+
+        axios.get(url + "?" + new URLSearchParams(params))
             .then(res => {
                 console.log(res);
-                if(res.error) {
-                    throw(res.error);
+                return res;
+            })
+            .then(res => {
+                if(res.data.message) {
+                    throw(res.data.message);
                 }
-                dispatch(fetchUserSuccess(res.user));
-                return res.user;
+                dispatch(fetchUserSuccess(res.data.token));
+                console.log(res.data.token);
+                window.localStorage.setItem("token", res.data.token);
+                return res.data.token;
             })
             .catch(error => {
                 dispatch(fetchUserError(error));

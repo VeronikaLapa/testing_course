@@ -8,13 +8,16 @@ import LogoutPage from "./LogoutPage";
 import store from "../store/store";
 import HelloPage from "./HelloPage";
 import axios from "axios";
-import Router from "./Router";
 
-function App(token) {
+function Router() {
     return (
-        <Provider store={store}>
-        <Router/>
-        </Provider>
+            <BrowserRouter>
+                <MenuBar/>
+                <Route exact path="/" component={LoginPage}/>
+                <Route exact path="/signup" component={SignupPage}/>
+                <Route exact path="/logout" component={LogoutPage}/>
+                <Route exact path="/hello" component={HelloPage}/>
+            </BrowserRouter>
     );
 }
 
@@ -22,4 +25,4 @@ function App(token) {
 //<Route exact path="/dialogs/:dialogId" component={DialogPage} />
 //<Route exact path="/info" component={InfoPage} />
 
-export default App;
+export default Router;

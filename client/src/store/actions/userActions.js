@@ -29,3 +29,9 @@ export function redirect() {
         type: 'REDIRECT'
     }
 }
+export function getAuthUser(res) {
+    return {
+        type: 'GET_AUTH_USER',
+        payload: {name: res.login, email: res.email}
+    }
+}

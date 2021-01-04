@@ -10,6 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import fetchUser from "../store/actions/fetchUser";
+import getAuth from "../store/actions/getAuth";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,13 +25,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function PopOver({auth}) {
+function PopOver({auth, name, getAuthUserAction}) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
-        console.log('Rerender!', anchorEl, open);
         if (anchorEl && auth) {
             setOpen(true);
         } else {
@@ -43,7 +44,12 @@ function PopOver({auth}) {
     const handleMenu = (event) => {
         console.log('handle menu');
         setAnchorEl(event.currentTarget);
-        setOpen(true);
+        if (name == null) {
+            getAuthUserAction();
+            setOpen(true);
+        } else {
+            setOpen(true);
+        }
     };
 
     const handleClose = () => {
@@ -80,7 +86,7 @@ function PopOver({auth}) {
                         open={open}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={handleClose}>{name}</MenuItem>
                         <MenuItem><Link to="/logout"><Typography color="error">Exit</Typography></Link></MenuItem>
                     </Menu>
                 </div>
@@ -92,8 +98,15 @@ function PopOver({auth}) {
 const mapStateToProps = store => {
     console.log(store); // посмотрим, что же у нас в store?
     return {
-        auth: store.user.auth
+        auth: store.user.auth,
+        name: store.user.user.name
+    }
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        getAuthUserAction: () => dispatch(getAuth()), // [1]
     }
 };
 
-export default connect(mapStateToProps)(PopOver);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PopOver);

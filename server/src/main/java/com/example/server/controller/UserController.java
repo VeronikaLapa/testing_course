@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController extends ApiController {
 
     private UserService userService;
@@ -25,12 +25,12 @@ public class UserController extends ApiController {
     }
 
 
-    @GetMapping("all")
+    @GetMapping("")
     public List getAllUsers(User user) {
         return userService.findAll(user);
     }
 
-    @GetMapping("all/filtered")
+    @GetMapping("/filtered")
     public List getUsers(User user, @RequestParam String login, @RequestParam String name, @RequestParam String email) {
         List<User> users = getAllUsers(user);
         return users.

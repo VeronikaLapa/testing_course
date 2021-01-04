@@ -32,7 +32,7 @@ public class RegistrationFormController extends ApiController {
         this.userCredentialsValidator = userCredentialsValidator;
     }
 
-    @PostMapping("user")
+    @PostMapping("users")
     public User create(@Valid @RequestBody UserCredentials userCredentials,
                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

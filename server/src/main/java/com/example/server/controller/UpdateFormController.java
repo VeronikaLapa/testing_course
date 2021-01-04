@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UpdateFormController extends ApiController {
 
     private UserService userService;
@@ -30,7 +30,7 @@ public class UpdateFormController extends ApiController {
         this.userUpdateValidator = userUpdateValidator;
     }
 
-    @PostMapping("update")
+    @PutMapping("")
     public User create(User user, @Valid @RequestBody UserUpdateCredentials userCredentials,
                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
