@@ -8,11 +8,16 @@
 ## Backend
 Минимальная версия для работы с пользователями.
 
-get api/jwt
-get api/users/authenticated
-get /api/users - список всех пользователей.
+Get api/jwt
+
+Get api/users/authenticated
+
+Get /api/users - список всех пользователей.
+
 Get /api/users/filtered - список пользователей с заданным login/name/email
+
 Post /api/users - создать нового пользователя
+
 Put /api/users - изменение данных текущего пользователя
 
 При запуске фроонтенд стартует на 3000 порте, бек на 8080.
