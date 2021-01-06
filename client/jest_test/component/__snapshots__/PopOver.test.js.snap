@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopOver render without auth Render popover 1`] = `<div />`;
+
+exports[`PopOver render without auth Render popover without auth 1`] = `<div />`;

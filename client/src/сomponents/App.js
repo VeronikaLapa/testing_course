@@ -1,13 +1,6 @@
 import React from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
 import {connect, Provider} from 'react-redux'
-import LoginPage from "./LoginPage";
-import SignupPage from "./SignupPage";
-import MenuBar from "./MenuBar";
-import LogoutPage from "./LogoutPage";
 import store from "../store/store";
-import HelloPage from "./HelloPage";
-import axios from "axios";
 import Router from "./Router";
 
 function App(token) {

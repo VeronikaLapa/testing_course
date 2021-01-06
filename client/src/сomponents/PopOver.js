@@ -46,10 +46,9 @@ function PopOver({auth, name, getAuthUserAction}) {
         setAnchorEl(event.currentTarget);
         if (name == null) {
             getAuthUserAction();
-            setOpen(true);
-        } else {
-            setOpen(true);
         }
+        setOpen(true);
+
     };
 
     const handleClose = () => {
