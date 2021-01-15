@@ -59,7 +59,9 @@ function LoginPage({loginAction, message, needRedirect, redirect}) {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form}
+                <form
+                    id='form'
+                    className={classes.form}
                       onSubmit={(e) => {
                           e.preventDefault();
                           loginAction(login, password);
@@ -88,10 +90,6 @@ function LoginPage({loginAction, message, needRedirect, redirect}) {
                         id="password"
                         autoComplete="current-password"
                         onChange={(event) => setPassword(event.target.value)}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary"/>}
-                        label="Remember me"
                     />
                     <Button
                         type="submit"
