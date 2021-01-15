@@ -20,7 +20,7 @@ export function userReducer(state = initialState, action) {
         case 'REDIRECT':
             return {...state, justLogin: false};
         case 'GET_AUTH_USER':
-            return {...state, user: action.payload};
+            return {...state, auth: true, user: action.payload};
         default:
             return state
     }

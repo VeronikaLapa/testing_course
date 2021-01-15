@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 import {connect, Provider} from 'react-redux'
 import LoginPage from "./LoginPage";
@@ -8,8 +8,14 @@ import LogoutPage from "./LogoutPage";
 import store from "../store/store";
 import HelloPage from "./HelloPage";
 import axios from "axios";
+import getAuth from "../store/actions/getAuth";
 
-function Router() {
+function Router({getAuthAction}) {
+    useEffect(() => {
+        console.log("fetAuth mount");
+        getAuthAction()
+    });
+
     return (
             <BrowserRouter>
                 <MenuBar/>
@@ -25,4 +31,10 @@ function Router() {
 //<Route exact path="/dialogs/:dialogId" component={DialogPage} />
 //<Route exact path="/info" component={InfoPage} />
 
-export default Router;
+const mapDispatchToProps = dispatch => {
+    return {
+        getAuthAction: () => dispatch(getAuth())
+    }
+};
+
+export default connect(null, mapDispatchToProps)(Router);

@@ -45,7 +45,7 @@ function PopOver({auth, name, getAuthUserAction}) {
         console.log('handle menu');
         setAnchorEl(event.currentTarget);
         if (name == null) {
-            getAuthUserAction();
+            //getAuthUserAction();
         }
         setOpen(true);
 

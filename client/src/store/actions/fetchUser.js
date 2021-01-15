@@ -1,5 +1,6 @@
 import {fetchUserPending, fetchUserSuccess, fetchUserError, getAuthUser} from './userActions';
 import axios from "axios";
+import getAuth from "./getAuth";
 
 function fetchUser(data) {
     return dispatch => {
@@ -15,17 +16,23 @@ function fetchUser(data) {
                 return res;
             })
             .then(res => {
-                if(res.data.message) {
-                    throw(res.data.message);
+                if (res.data.message) {
+                    console.log("!" + res.data.message);
+                    dispatch(fetchUserError(res.data.message));
+                } else {
+                    dispatch(fetchUserSuccess(res.data.token));
+                    console.log(res.data.token);
+                    localStorage.setItem("token", res.data.token);
+                    dispatch(getAuth());
                 }
-                dispatch(fetchUserSuccess(res.data.token));
-                console.log(res.data.token);
-                window.localStorage.setItem("token", res.data.token);
-                return res.data.token;
             })
             .catch(error => {
-                dispatch(fetchUserError(error));
-            })
+                console.log(error.message);
+                dispatch(fetchUserError(error.message));
+
+                }
+            )
+
     }
 }
 
