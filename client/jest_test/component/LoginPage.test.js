@@ -4,13 +4,14 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import LoginPage from "../../src/сomponents/LoginPage";
 import {MemoryRouter, Router} from "react-router-dom";
-import {mount} from "enzyme";
+import {mount, render} from "enzyme";
 
 import "../setupTest"
 import {TextField} from "@material-ui/core";
 import {renderWithProviders, renderWithTestStore} from "./wrapper";
 import {redirect} from "../../src/store/actions/userActions";
 import thunk from "redux-thunk";
+import Button from "@material-ui/core/Button";
 
 
 
@@ -56,17 +57,11 @@ describe('Login page rendered', function () {
         loginPage.find('#password').find("input[type='password']").simulate('change', { target: { value: 'Password' } });
         loginPage.find('form').simulate('submit', { preventDefault: () => console.log('preventDefault') });
         expect(store.getActions().pop().type).toEqual("FETCH_USER_PENDING");
-
-    })
-/*
-    it('values from input writes in state', () => {
-        const { component, store } = setup();
-        loginPage.find('#login').find("input[type='text']").simulate('change', { target: { value: 'Name' } });
-        loginPage.find('#password').find("input[type='password']").simulate('change', { target: { value: 'Password' } });
-        const p = loginPage.find(LoginPage);
-        expect(loginPage.find(LoginPage).prop("login")).toEqual('Name');
-        console.log(component.find(LoginPage).props());
     });
 
- */
+    it('Login and password are required', function() {
+        loginPage = mount(<MemoryRouter><Provider store={store}><LoginPage /></Provider></MemoryRouter>);
+        expect(loginPage.find(TextField).at(0).prop('required')).toBeTruthy();
+        expect(loginPage.find(TextField).at(1).prop('required')).toBeTruthy();
+    })
 });

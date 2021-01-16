@@ -96,6 +96,7 @@ function LoginPage({loginAction, message, needRedirect, redirect}) {
                         fullWidth
                         variant="contained"
                         color="primary"
+                        id="submit"
                         className={classes.submit}
                     >
                         Sign In

@@ -67,6 +67,7 @@ function PopOver({auth, name, getAuthUserAction}) {
                         aria-haspopup="true"
                         onClick={handleMenu}
                         color="inherit"
+                        id='avatar'
                     >
                         <AccountCircle/>
                     </IconButton>

@@ -27,9 +27,12 @@ function fetchUser(data) {
                 }
             })
             .catch(error => {
-                console.log(error.message);
-                dispatch(fetchUserError(error.message));
+                    if (error.response.data.message) {
+                        dispatch(fetchUserError(error.response.data.message));
+                    } else {
+                        dispatch(fetchUserError(error.message));
 
+                    }
                 }
             )
 

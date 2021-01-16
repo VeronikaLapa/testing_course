@@ -1,13 +1,6 @@
 import React from 'react';
 import {userReducer} from "../../src/store/reducers/user";
 
-describe('Sum', () => {
-    for (let i = 0; i < 10; ++i) {
-        test('should', function () {
-            expect(i + 1).toBe(++i);
-        });
-    }
-});
 describe('UserReducer', () => {
     let state = {auth: true, user: {email: 'a', name:'b'}, pending: false};
     test('LOG_OUT', () => {
