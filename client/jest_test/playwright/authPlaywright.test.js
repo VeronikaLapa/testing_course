@@ -59,7 +59,7 @@ describe("Authorization", () => {
         await page.goto(homeUrl + 'hello');
         const screen = await page.screenshot();
         let data = await compareImages(screen, 'jest_test/playwright/screens/hello-authorized.png');
-        await fs.writeFile("./output.png", data.getBuffer());
+        fs.writeFile("./output.png", data.getBuffer(),() => {});
         //expect(data.misMatchPercentage).toEqual(0);
     })
 });
