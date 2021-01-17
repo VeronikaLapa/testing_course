@@ -9,8 +9,16 @@ import com.example.server.validator.UserCredentials;
 import com.example.server.validator.UserCredentialsValidator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.util.Map;
 import java.util.Optional;
@@ -19,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
 @WebMvcTest
+@AutoConfigureRestDocs(outputDir = "target/snippets")
 public class JwtControllerComponentTest {
 
     @MockBean
@@ -35,6 +44,9 @@ public class JwtControllerComponentTest {
 
     @Autowired
     JwtController controller;
+
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     public void testGreeting() {
