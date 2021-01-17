@@ -6,10 +6,6 @@ var chai = require('chai')
     , assert = chai.assert;
 
 describe('UserActions', () => {
-    it('log out action', () => {
-        let action = logout();
-        action.type.should.be.equal('LOG_OUT')
-    });
     it('fetch user success action', () => {
         let res = {name: 'ann', email: 'email'};
         let action = fetchUserSuccess(res);
