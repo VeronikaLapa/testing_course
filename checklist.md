@@ -15,7 +15,7 @@
 ✅ Существует нескольно наборов тестов (несколько suites)  
 
 ### Bonus:
-✅ [Jest vs Mocha](https://docs.google.com/document/d/1ulTE9VyNpwI2yN60doqlsrUM3ugssI3IxJV3HlQqFOY/edit?usp=sharing) Постараюсь потом перенести в гитхаб
+✅ [Jest vs Mocha](https://docs.google.com/document/d/1ulTE9VyNpwI2yN60doqlsrUM3ugssI3IxJV3HlQqFOY/edit?usp=sharing) Ссылка есть также на GithubPages
 
 ## Е2Е тестирование
 
