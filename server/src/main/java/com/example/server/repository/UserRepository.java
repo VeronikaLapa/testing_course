@@ -18,9 +18,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAll(String id);
 
     int countByLogin(String login);
-    /*
-    @Modifying
-    @Query("UPDATE user u SET u.login = ?1, u.name = ?2, u.email = ?3, u.passwor = ?4 where u.id = ?5")
-    User setUserInfoById(String login, String name, String email, String password, long id);
-    */
+
 }

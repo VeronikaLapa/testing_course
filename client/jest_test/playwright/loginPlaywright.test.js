@@ -50,10 +50,6 @@ describe("Login page", () => {
                 body: JSON.stringify({"id":1,"login":"TestName","password":"123456","email":"TestEmail","name":"Tom","creationTime":1609777856000}),
             })
         });
-        page.on('request', request =>
-            console.log('>>', request.method(), request.url()));
-        page.on('response', response =>
-            console.log('<<', response.status(), response.url()));
 
         await page.goto(homeUrl);
         await page.fill('#login', 'Login');
