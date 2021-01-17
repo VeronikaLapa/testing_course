@@ -33,4 +33,4 @@ jobs:
         run: npm install
       
       - name: Run mocha tests
-        run: npm mochatest
+        run: npm start mochatest
