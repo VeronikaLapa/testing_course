@@ -1,4 +1,5 @@
 import {homeUrl} from "./config";
+import resemble from "resemblejs";
 
 const { webkit, chromium } = require('playwright');
 jest.setTimeout(40 * 1000);
@@ -40,6 +41,15 @@ describe("Login page", () => {
                 status: 200,
                 body: JSON.stringify({token: "token"}),
             })});
+        await page.route('**/api/users/authenticated*', route => {
+            console.log('Catched!');
+            route.fulfill({
+                contentType: 'application/json',
+                headers: {'access-control-allow-origin': '*'},
+                status: 200,
+                body: JSON.stringify({"id":1,"login":"TestName","password":"123456","email":"TestEmail","name":"Tom","creationTime":1609777856000}),
+            })
+        });
         page.on('request', request =>
             console.log('>>', request.method(), request.url()));
         page.on('response', response =>
@@ -51,7 +61,15 @@ describe("Login page", () => {
         await page.click('#submit');
         const localStorage = await page.evaluate(() => window.localStorage);
         expect('token' in localStorage);
-        expect(page.url()).toEqual(homeUrl+"hello")
+        expect(page.url()).toEqual(homeUrl+"hello");
+
+        const screen = await page.screenshot();
+        resemble(screen)
+            .compareTo('jest_test/playwright/screens/hello-authorized.png')
+            .ignoreColors()
+            .onComplete(function(data) {
+                console.log(data);
+            });
     });
 
     it("error login", async () => {
@@ -76,5 +94,16 @@ describe("Login page", () => {
         expect(!('token' in localStorage));
         expect(page.url()).toEqual(homeUrl);
         expect(await page.textContent("#login-helper-text")).toEqual("Some error")
+    });
+    it('Screenshoot test', async () => {
+        await page.goto(homeUrl);
+        const screen = await page.screenshot();
+        resemble(screen)
+            .compareTo('jest_test/playwright/screens/signin.png')
+            .ignoreColors()
+            .onComplete(function(data) {
+                console.log(data);
+                expect(data.rowMisMatchPercentage).toEqual(0);
+            });
     })
 });

@@ -27,7 +27,7 @@ function fetchUser(data) {
                 }
             })
             .catch(error => {
-                    if (error.response.data.message) {
+                    if (error.response && error.response.data && error.response.data.message) {
                         dispatch(fetchUserError(error.response.data.message));
                     } else {
                         dispatch(fetchUserError(error.message));

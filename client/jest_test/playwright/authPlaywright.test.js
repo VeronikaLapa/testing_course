@@ -1,6 +1,10 @@
 import {homeUrl} from "./config";
+import resemble from 'resemblejs'
+import compareImages from 'resemblejs/compareImages'
 
 const {webkit, chromium} = require('playwright');
+import fs from 'fs';
+
 jest.setTimeout(40 * 1000);
 
 describe("Authorization", () => {
@@ -23,7 +27,14 @@ describe("Authorization", () => {
                 contentType: 'application/json',
                 headers: {'access-control-allow-origin': '*'},
                 status: 200,
-                body: JSON.stringify({"id":1,"login":"TestName","password":"123456","email":"TestEmail","name":"Tom","creationTime":1609777856000}),
+                body: JSON.stringify({
+                    "id": 1,
+                    "login": "TestName",
+                    "password": "123456",
+                    "email": "TestEmail",
+                    "name": "Tom",
+                    "creationTime": 1609777856000
+                }),
             })
         });
         page.on('request', request =>
@@ -37,11 +48,18 @@ describe("Authorization", () => {
         await page.close();
     });
     it('Hello page shows name', async () => {
-        await page.goto(homeUrl+'hello');
-        expect(await page.textContent("h1")).toEqual("Hello TestName")
+        await page.goto(homeUrl + 'hello');
+        expect(await page.textContent("h1")).toEqual("Hello TestName");
     });
     it('Has avatar in main page', async () => {
         await page.goto(homeUrl);
         expect(await page.$$('#avatar')).toHaveLength(1)
+    });
+    test('Hello screenshot test', async () => {
+        await page.goto(homeUrl + 'hello');
+        const screen = await page.screenshot();
+        let data = await compareImages(screen, 'jest_test/playwright/screens/hello-authorized.png');
+        await fs.writeFile("./output.png", data.getBuffer());
+        //expect(data.misMatchPercentage).toEqual(0);
     })
 });
