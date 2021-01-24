@@ -33,4 +33,5 @@ jobs:
         run: npm install
       
       - name: Run mocha tests
-        run: npm start mochatest
+        working-directory: ${{ env.working-directory }}
+        run: npm run mochatest
