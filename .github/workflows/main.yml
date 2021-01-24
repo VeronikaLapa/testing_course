@@ -24,4 +24,5 @@ jobs:
         with:
           java-version: 14
       - name: Build with Maven
+        working-directory: ${{ env.working-directory }}
         run: mvn clean test
