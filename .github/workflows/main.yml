@@ -31,4 +31,4 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Run tests with Maven
         working-directory: ${{ env.working-directory }}
-        run: mvn -B test --file pom.xml
+        run: mvn -B -Dtest=JwtServiceTest test
