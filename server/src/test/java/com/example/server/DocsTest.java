@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(value=TestController.class, excludeAutoConfiguration = {SecurityAutoConfiguration.class})
+@WebMvcTest(value=TestController.class)
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @AutoConfigureRestDocs(outputDir = "target/snippets")
 public class DocsTest {

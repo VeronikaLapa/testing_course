@@ -3,6 +3,7 @@ package com.example.server;
 import com.example.server.controller.JwtController;
 import com.example.server.domain.User;
 import com.example.server.interceptor.AuthorizationInterceptor;
+import com.example.server.repository.UserRepository;
 import com.example.server.service.JwtService;
 import com.example.server.service.UserService;
 import com.example.server.validator.UserCredentials;
@@ -12,9 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -30,6 +35,15 @@ import static org.mockito.BDDMockito.given;
 @AutoConfigureRestDocs(outputDir = "target/snippets")
 public class JwtControllerComponentTest {
 
+    @Configuration
+    @Import(JwtController.class)
+    static class TestConfig {
+        @Bean
+        UserRepository userRepository() {
+            return mock(UserRepository.class);
+        }
+    }
+
     @MockBean
     JwtService service;
 
@@ -44,9 +58,6 @@ public class JwtControllerComponentTest {
 
     @Autowired
     JwtController controller;
-
-    @Autowired
-    private MockMvc mockMvc;
 
     @Test
     public void testGreeting() {
