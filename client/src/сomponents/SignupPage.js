@@ -51,8 +51,8 @@ function SignupPage() {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                autoComplete="firstName"
-                                name="given-name"
+                                autoComplete="given-name"
+                                name="firstName"
                                 variant="outlined"
                                 required
                                 fullWidth
