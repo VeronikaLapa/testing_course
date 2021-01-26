@@ -52,7 +52,7 @@ function SignupPage() {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 autoComplete="firstName"
-                                name="firstName"
+                                name="given-name"
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -69,7 +69,7 @@ function SignupPage() {
                                 id="lastName"
                                 label="Last Name"
                                 name="lastName"
-                                autoComplete="lastName"
+                                autoComplete="family-name"
                             />
                         </Grid>
                         <Grid item xs={12}>
