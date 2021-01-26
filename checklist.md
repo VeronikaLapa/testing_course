@@ -80,7 +80,7 @@
 ## Selenium:
 
 ### Main:
-❌ Есть e2e тесты с использованием Selenide.
+✅ Есть e2e тесты с использованием Selenide.
 
 ### Advanced:
 ❌
